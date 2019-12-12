@@ -229,6 +229,10 @@ You need OPAM package files for now.
 # satysfi-great-library.opam
 opam-version: "2.0"
 name: "satysfi-great-library"
+build-env: [
+  # ライブラリ名
+  satysfi-name = "great-library"
+]
 version: "1.0"
 synopsis: "A Great SATySFi Package"
 description: """
@@ -250,7 +254,7 @@ depends: [
 build: [ ]
 install: [
   ["satyrographos" "opam" "install"
-   "-name" "great-package"
+   "-name" "%{satysfi-name}%"
    "-prefix" "%{prefix}%"
    "-script" "%{build}%/Satyristes"]
 ]
@@ -260,6 +264,10 @@ install: [
 # satysfi-great-library-doc.opam
 opam-version: "2.0"
 name: "satysfi-great-library-doc"
+build-env: [
+  # ライブラリ名
+  satysfi-name = "great-library"
+]
 version: "1.0"
 synopsis: "Document of A Great SATySFi Package"
 description: """
@@ -275,19 +283,17 @@ depends: [
   "satysfi" {>= "0.0.3" & < "0.0.4"}
   "satyrographos" {>= "0.0.2" & < "0.0.3"}
   "satysfi-lib-dist"
-
-  # You may want to include the corresponding library
-  "satysfi-great-library" {= "%{version}%"}
+  "satysfi-%{satysfi-name}%" {= "%{version}%"}
 ]
 build: [
   ["satyrographos" "opam" "build"
-   "-name" "great-package-doc"
+   "-name" "%{satysfi-name}%-doc"
    "-prefix" "%{prefix}%"
    "-script" "%{build}%/Satyristes"]
 ]
 install: [
   ["satyrographos" "opam" "install"
-   "-name" "great-package-doc"
+   "-name" "%{satysfi-name}%-doc"
    "-prefix" "%{prefix}%"
    "-script" "%{build}%/Satyristes"]
 ]
